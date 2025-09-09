@@ -4,7 +4,7 @@ import WeatherBackdropSmall from "../../assets/images/bg-today-small.svg";
 export default function Weathercard() {
   return (
     <div
-      className="weathercard__container relative bg-cover bg-center h-64 rounded-xl p-4 flex text-white items-center justify-between"
+      className="weathercard__container relative bg-cover bg-center h-64 h-full flex-1 rounded-xl p-4 flex text-white items-center justify-between"
       style={{ backgroundImage: `url(${WeatherBackdropLarge})` }}
     >
       <div className="flex-col">
