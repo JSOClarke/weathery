@@ -9,7 +9,11 @@ interface ForecastProps {
 }
 
 export default function Forecast({ data, loading }: ForecastProps) {
-  const [selectedDay, setSelectedDay] = useState<number>(0);
+  const currentDay = new Date().getDay() ?? 0;
+
+  const [selectedDay, setSelectedDay] = useState<number>(currentDay);
+
+  console.log("selectedDay", selectedDay);
 
   return (
     <div className=" flex h-full flex-col gap-2 rounded-xl p-4 ">

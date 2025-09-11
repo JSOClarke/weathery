@@ -1,22 +1,29 @@
 import WeatherBackdropLarge from "../../assets/images/bg-today-large.svg";
 import WeatherBackdropSmall from "../../assets/images/bg-today-small.svg";
-import type { DailyRes } from "../../services/weatherApi";
+import type { useGeocodeData } from "../../hooks/useGeocode";
+import type { CurrentRes } from "../../services/weatherApi";
+import type { LocationData, LocationTitle } from "../Search/Searchbox";
 
 interface WeathercardProps {
-  data: DailyRes;
+  data: CurrentRes;
+  locationTitle: LocationTitle;
 }
 
-export default function Weathercard({ data }: WeathercardProps) {
+export default function Weathercard({ data, locationTitle }: WeathercardProps) {
+  console.log(data?.time);
   return (
     <div
-      className="weathercard__container relative bg-cover bg-center h-64 h-full flex-1 rounded-xl p-4 flex text-white items-center justify-between"
+      className="weathercard__container relative bg-cover bg-center w-full h-64 h-full flex-1 rounded-xl p-4 flex text-white items-center justify-between"
       style={{ backgroundImage: `url(${WeatherBackdropLarge})` }}
     >
       <div className="flex-col">
-        <h1 className="place text-2xl ">Berlin, Germany</h1>
+        <h1 className="place text-2xl ">
+          {locationTitle !== null &&
+            `${locationTitle?.name},${locationTitle?.country}`}
+        </h1>
         <h2 className="date font-light ">
           {data !== undefined &&
-            data.time.toLocaleDateString("en-US", {
+            new Date(data?.time).toLocaleDateString("en-US", {
               weekday: "long",
               year: "numeric",
               month: "long",
@@ -24,8 +31,8 @@ export default function Weathercard({ data }: WeathercardProps) {
             })}
         </h2>
       </div>
-      <h1 className="temperature text-7xl">
-        {data !== undefined && `${data.temperature_2m_mean}°`}
+      <h1 className="temperature text-3xl">
+        {data !== undefined && `${data.temperature}°`}
       </h1>
     </div>
   );

@@ -7,7 +7,7 @@ export default function ForecastCard({ temperature, time }: ForecastCardProps) {
   function timeFormatter(time: Date): string {
     const hours = time.getHours().toString();
     if (Number(hours) < 12) return hours + "AM";
-    if (Number(hours) >= 12) return hours + "PM";
+    if (Number(hours) >= 12) return Number(hours) - 12 + "PM";
     return hours.toString();
   }
   return (
